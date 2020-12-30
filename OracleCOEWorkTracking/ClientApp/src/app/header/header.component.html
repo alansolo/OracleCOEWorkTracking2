@@ -1,0 +1,25 @@
+<header class="navbar-inverse navbar-toggleable bg-inverse p-0">
+  <nav class="container-fluid pl-2 pl-lg-3 pr-lg-3 m-0 mr-sm-auto ml-sm-auto">
+    <div class="container-fluid p-0">
+      <a class="navbar-brand ml-3 ml-lg-0 pl-2"  routerLink="/">
+        <span>{{ 'HeaderTitle' | translate }}</span>
+      </a>
+      <div class="nav-custom" id="myNavbar">
+        <div class="collapse navbar-collapse justify-content-end">
+          <ul class="navbar-nav">
+            <li class="nav-item hoverable" *ngIf="user?.role > 0">
+              <a class="nav-link font-weight-medium hoverable" routerLink="/requests/add">Log A Request</a>
+            </li>
+            <li class="nav-item hoverable">
+              <a class="nav-link font-weight-medium hoverable" routerLink="/requests">View Requests</a>
+            </li>
+            <li class="nav-item hoverable" *ngIf="user?.role > 1">
+              <a class="nav-link font-weight-medium hoverable" routerLink="/requests/manage">Request Management</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+

@@ -1,0 +1,95 @@
+<div class="component-fluid">
+  <div class="row mb-5 mx-auto">
+    <h2 class="content-h2 col-md-10 px-0 pt-0">{{ 'ViewRequestsHeader' | translate }}</h2>
+  </div>
+  <div class="row col-12">
+    <div class="form-group col-3">
+      <label for="view" class="small text-uppercase">{{ 'ViewName' | translate }}</label>
+      <kendo-dropdownlist [data]="views" textField="name" valueField="id" (selectionChange)="viewChange($event)" [(ngModel)]="selectedView"></kendo-dropdownlist>
+    </div>
+  </div>
+  <kendo-grid style="width: 100%; height: 99%; font-size:12px;"
+              #requestsGrid
+              id="requestsGrid"
+              [data]="gridView"
+              [pageSize]="state.take"
+              [pageable]="{
+                          info: true,
+                          pageSizes: [25, 50, 100, 200, 500],
+                          previousNext: true
+                        }"
+              [resizable]="true"
+              [reorderable]="true"
+              [skip]="state.skip"
+              filterable="menu"
+              [sortable]="{
+            allowUnsort: true,
+            mode: 'multiple'}"
+              [sort]="state.sort"
+              [filter]="state.filter"
+              [loading]="isLoading"
+              (dataStateChange)="dataStateChange($event)"
+              (columnReorder)="onColumnReorder($event)">
+    >
+    <ng-template kendoGridToolbarTemplate>
+      <div class="row col-12 pt-0 pt-2">
+        <div class="form-group col-6 mb-0">
+          <label><input type="radio" name="filter" (change)="filterClick($event)" value="1" checked>{{ 'OpenRequests' | translate }}</label> &nbsp;&nbsp;&nbsp;&nbsp;
+          <label><input type="radio" name="filter" (change)="filterClick($event)" value="2">{{ 'AllRequests' | translate }}</label>
+        </div>
+        <div class="form-group col-6 pr-0 pr-0 mb-0">
+          <div style="text-align: right;">
+            <button type="button" class="btn-success" kendoGridExcelCommand icon="file-excel" title="Export to Excel" alt="Export to Excel"></button>&nbsp;&nbsp;
+            <button type="button" class="btn-secondary k-button-icon k-button" (click)="resetFilters()" title="Reset Filters" alt="Reset Filters"><span class="material-icons">settings_backup_restore</span></button>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+    <kendo-grid-column field="id" title="Req #" filter="numeric" [width]="115" [locked]="true"></kendo-grid-column>
+    <kendo-grid-column field="appName.name" title="Application" [width]="200" [locked]="true"></kendo-grid-column>
+    <kendo-grid-column field="projectName" title="Project Name" [width]="200" [locked]="true"></kendo-grid-column>
+    <kendo-grid-column field="problem" title="Problem" [width]="500"></kendo-grid-column>
+    <kendo-grid-column field="gbsPriority" title="GBS Priority" [width]="150"></kendo-grid-column>
+    <kendo-grid-column field="benefitCase" title="Benefit Case" [width]="500"></kendo-grid-column>
+    <kendo-grid-column field="status.name" title="Status" [width]="200"></kendo-grid-column>
+    <kendo-grid-column field="requestor" title="Requester" [width]="200"></kendo-grid-column>
+    <kendo-grid-column field="regionsString" title="Region(s)" [width]="200">
+    </kendo-grid-column>
+    <kendo-grid-column field="sbUsString" title="SBU(s)" [width]="200">
+    </kendo-grid-column>
+    <kendo-grid-column field="owningSite.name" title="Owning Site" [width]="200"></kendo-grid-column>
+    <kendo-grid-column field="owningStream.name" title="Owning Stream" [width]="200"></kendo-grid-column>
+    <kendo-grid-column field="impactedStreamsString" title="Impacted Stream(s)" [width]="200">
+    </kendo-grid-column>
+    <kendo-grid-column field="attachments" title="Attachment(s)" [width]="250">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <div *ngFor="let attachment of dataItem.attachments"><button type="button" class="btn btn-link" (click)="downloadAttachment(attachment.id)">{{attachment.fileName}}</button></div>
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column field="totalEstimate" title="Total Estimate" [format]="'n2'" filter="numeric" [width]="150"></kendo-grid-column>
+    <kendo-grid-column field="testingDate" title="Testing Date" filter="date" [format]="'yyyy-MM-dd'" [width]="200"></kendo-grid-column>
+    <kendo-grid-column field="productionDate" title="Production Date" filter="date" [format]="'yyyy-MM-dd'" [width]="200"></kendo-grid-column>
+    <kendo-grid-column field="functionalContact" title="Functional Contact" [width]="200"></kendo-grid-column>
+    <kendo-grid-column field="biContact" title="BI Contact" [width]="200"></kendo-grid-column>
+    <kendo-grid-column field="frontLineItContact" title="Front Line IT Contact" [width]="200"></kendo-grid-column>
+    <kendo-grid-column field="md_50" title="MD.50" [width]="200">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <a [attr.href]="dataItem.mD_50" [attr.target]="'_blank'" *ngIf="dataItem.mD_50">MD.50</a>
+      </ng-template>
+    </kendo-grid-column>
+    <kendo-grid-column field="oraclePreProdEnvironmentsString" title="Oracle Pre-Prod Env(s)" [width]="200">
+    </kendo-grid-column>
+    <kendo-grid-column field="tipUrl" title="TIP Link" [width]="200"></kendo-grid-column>
+    <kendo-grid-column field="biRequest.name" title="BI Request" [width]="200"></kendo-grid-column>
+    <kendo-grid-column field="createdOn" title="Date Requested" filter="date" [format]="'yyyy-MM-dd'" [width]="200"></kendo-grid-column>
+    <kendo-grid-column field="originalSystemReference" title="Link/Orig System Reference" [width]="250"></kendo-grid-column>
+    <kendo-grid-column field="modifiedOn" title="Modified" filter="date" [format]="'yyyy-MM-dd'" [width]="200"></kendo-grid-column>
+    <kendo-grid-column field="modifiedBy" title="Modified By" [width]="200"></kendo-grid-column>
+    <ng-template kendoGridNoRecordsTemplate>
+      <div *ngIf="!isLoading">
+        No Requests Found
+      </div>
+    </ng-template>
+    <kendo-grid-excel fileName="Requests.xlsx" [fetchData]="allData"></kendo-grid-excel>
+  </kendo-grid>
+</div>

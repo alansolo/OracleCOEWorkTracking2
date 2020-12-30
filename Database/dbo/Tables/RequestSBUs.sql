@@ -1,0 +1,19 @@
+﻿CREATE TABLE [dbo].[RequestSBUs] (
+    [Id]        INT IDENTITY (1, 1) NOT NULL,
+    [RequestId] INT NOT NULL,
+    [SBUId]     INT NOT NULL,
+    CONSTRAINT [PK_RequestSBUs] PRIMARY KEY CLUSTERED ([Id] ASC) WITH (FILLFACTOR = 90, PAD_INDEX = ON),
+    CONSTRAINT [FK_RequestSBUs_Requests_RequestId] FOREIGN KEY ([RequestId]) REFERENCES [dbo].[Requests] ([Id]) ON DELETE CASCADE,
+    CONSTRAINT [FK_RequestSBUs_SBUs_SBUId] FOREIGN KEY ([SBUId]) REFERENCES [dbo].[SBUs] ([Id]) ON DELETE CASCADE
+);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_RequestSBUs_RequestId]
+    ON [dbo].[RequestSBUs]([RequestId] ASC) WITH (FILLFACTOR = 90, PAD_INDEX = ON);
+
+
+GO
+CREATE NONCLUSTERED INDEX [IX_RequestSBUs_SBUId]
+    ON [dbo].[RequestSBUs]([SBUId] ASC) WITH (FILLFACTOR = 90, PAD_INDEX = ON);
+

@@ -1,0 +1,108 @@
+<div class="container-fluid">
+  <div class="row mb-5 mx-auto">
+    <h2 class="content-h2 col-md-10 px-0 pt-0">{{ 'LogRequestHeader' | translate }}</h2>
+  </div>
+
+  <form [formGroup]="addRequestForm" (submit)="submitRequest()">
+      <div class="row col-12">
+        <div class="form-group col-6" [ngClass]="displayFieldCss('appName')">
+          <label for="appName" class="small text-uppercase required">{{ 'AppNameLabel' | translate }}</label>
+          <app-select-list id="appName" [isDefaultFocus]="true" formControlName="appName" [listItems]="appNames" [required]="true" (change)="onAppSelect($event)"></app-select-list>
+          <app-field-error-display [displayError]="isFieldInvalid('appName')" errorMsg="{{ 'FieldIsRequired' | translate }}"></app-field-error-display>
+        </div>
+      </div>
+      <div class="row col-12">
+        <div class="form-group col-6" [ngClass]="displayFieldCss('projectName')">
+          <label for="projectName" class="small text-uppercase required">{{ 'ProjectNameLabel' | translate }}</label>
+          <input id="projectName" formControlName="projectName" class="form-control"  type="text" name="projectName" required />
+          <app-field-error-display [displayError]="isFieldInvalid('projectName')" errorMsg="{{ 'FieldIsRequired' | translate }}"></app-field-error-display>
+        </div>
+      </div>
+      <div class="row col-12">
+        <div class="form-group col-12" [ngClass]="displayFieldCss('problem')">
+          <label for="problem" class="small text-uppercase required">{{ 'Problem' | translate }}</label>
+          <textarea id="problem" formControlName="problem" class="form-control" type="text" rows="3" name="problem" required></textarea>
+          <app-field-error-display [displayError]="isFieldInvalid('problem')" errorMsg="{{ 'FieldIsRequired' | translate }}"></app-field-error-display>
+        </div>
+      </div>
+      <div class="row col-12">
+        <div class="form-group col-12" [ngClass]="displayFieldCss('benefitCase')">
+          <label for="benefitCase" class="small text-uppercase required">{{ 'BenefitCase' | translate }}</label>
+          <textarea id="benefitCase" formControlName="benefitCase" class="form-control" type="text" rows="3" name="benefitCase" required></textarea>
+          <app-field-error-display [displayError]="isFieldInvalid('benefitCase')" errorMsg="{{ 'FieldIsRequired' | translate }}"></app-field-error-display>
+        </div>
+      </div>
+      <div class="row col-12">
+        <div class="form-group col-6" [ngClass]="displayFieldCss('regions')">
+          <label for="regions" class="small text-uppercase required">{{ 'Region' | translate }}</label>
+          <ng-multiselect-dropdown [placeholder]=""
+                                   [data]="dropDownRegionList"
+                                   formControlName="regions"
+                                   [settings]="multiDropDownSettings" required>
+          </ng-multiselect-dropdown>
+          <app-field-error-display [displayError]="isFieldInvalid('regions')" errorMsg="{{ 'FieldIsRequired' | translate }}"></app-field-error-display>
+        </div>
+        <div class="form-group col-6" [ngClass]="displayFieldCss('sbus')">
+          <label for="sbus" class="small text-uppercase required">{{ 'SBU' | translate }}</label>
+          <ng-multiselect-dropdown [placeholder]=""
+                                   [data]="dropDownSBUList"
+                                   formControlName="sbus"
+                                   [settings]="multiDropDownSettings" required>
+          </ng-multiselect-dropdown>
+          <app-field-error-display [displayError]="isFieldInvalid('sbus')" errorMsg="{{ 'FieldIsRequired' | translate }}"></app-field-error-display>
+        </div>
+      </div>
+      <div class="row col-12">
+        <div class="form-group col-6" [ngClass]="displayFieldCss('owningSite')">
+          <label for="owningSite" class="small text-uppercase">{{ 'OwningSite' | translate }}</label>
+          <app-select-list id="owningSite" formControlName="owningSite" [listItems]="owningSites" [required]="false"></app-select-list>
+        </div>
+        <div class="form-group col-6" [ngClass]="displayFieldCss('owningStream')">
+          <label for="owningStream" class="small text-uppercase required">{{ 'OwningStream' | translate }}</label>
+          <app-select-list id="owningStream" formControlName="owningStream" [listItems]="owningStreams" [required]="true"></app-select-list>
+          <app-field-error-display [displayError]="isFieldInvalid('owningStream')" errorMsg="{{ 'FieldIsRequired' | translate }}"></app-field-error-display>
+        </div>
+      </div>
+      <div class="row col-12">
+        <div class="form-group col-5" [ngClass]="displayFieldCss('requestor')">
+          <label for="requestor" class="small text-uppercase">{{ 'Requestor' | translate }}</label>
+          <input id="requestor" formControlName="requestor" class="form-control" type="text" name="requestor" value={{requestor?.displayName}} readonly />
+        </div>
+        <div class="form-group col-1 pl-0 pt-4">
+          <button type="button" class="btn btn-outline-primary" (click)="changeRequestorHandler($event)">{{ 'Change' | translate }}</button>
+        </div>
+        <div class="form-group col-6">
+          <label class="small text-uppercase">{{ 'BIRequest' | translate }}</label>
+          <br />
+          <input type="radio" id="biRequestId" formControlName="biRequestId" value="1">Yes &nbsp;&nbsp;
+          <input type="radio" id="biRequestId" formControlName="biRequestId" value="0">No
+        </div>
+      </div>
+      <div class="row col-12">
+        <div class="form-group col-12" [ngClass]="displayFieldCss('originalSystemReference')">
+          <label for="originalSystemReference" class="small text-uppercase">{{ 'OriginalSystemReference' | translate }}</label>
+          <textarea id="originalSystemReference" formControlName="originalSystemReference" class="form-control" type="text" rows="2" name="originalSystemReference"></textarea>
+        </div>
+      </div>
+      <div class="row col-12">
+        <div class="form-group col-3">
+          <label for="originalSystemReference" class="small text-uppercase">{{ 'AddAttachment' | translate }}</label>
+          <br />
+          <input type="file" #fileInput id="attachments" formControlName="attachments" (change)="onFileChanged($event)" multiple #attachments style="display:none">
+          <button class="btn btn-outline-primary" (click)="openFileBrowser($event)">{{ 'Select Files' | translate }}</button>
+        </div>
+        <div class="form-group col-9">
+          <div *ngFor="let selected of listOfFiles;let index = index">
+            <span>
+              <label class="small text-uppercase">{{selected}}</label>
+              <button class="btn btn-danger" (click)="removeSelectedFile(index)"> X </button>
+            </span>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <button class="btn btn-primary" type="submit">{{ 'SubmitRequest' | translate }}</button>
+</form>
+</div> 
+
+

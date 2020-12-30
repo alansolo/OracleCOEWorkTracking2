@@ -1,0 +1,92 @@
+/* You can add global styles to this file, and also import other style files */
+/*@import url("https://fonts.googleapis.com/icon?family=Material+Icons");*/
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+@import url('/assets/css/customize-bootstrap.css');
+@import url('/assets/css/ppg-design-system.css');
+/* All buttons on modals */
+.modal-buttons {
+  float: right;
+  margin-bottom: 10px;
+}
+
+/* All buttons for grids */
+.action-buttons {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+/* All Save buttons*/
+.save-buttons {
+  text-align: right;
+}
+
+/* To show on modals which fields are required */
+.required:after {
+  content: " *";
+  color: red;
+}
+
+/* For error messages below input fields*/
+.error-msg {
+  color: #a94442;
+}
+
+
+.fix-error-icon {
+  top: 27px;
+}
+
+/* Drop down list in formulations grid to be full height of cell */
+.ag-theme-balham .ag-cell-inline-editing select {
+  height: 100%;
+}
+
+.ag-header-cell-label .ag-header-cell-text {
+  white-space: normal !important;
+}
+
+.breadcrumb-item {
+  z-index: 2;
+}
+
+.k-grid td {
+  font-size: 12px;
+}
+
+.k-grid th {
+  font-size: 14px;
+}
+
+.k-button {
+  font-size: 14px;
+}
+
+.k-grid-edit-row td > .k-textbox, .k-grid-edit-row td > .k-widget, .k-command-cell > .k-button, .k-edit-cell > .k-textbox, .k-edit-cell > .k-widget {
+  font-size: 12px;
+}
+/*.k-grid-header .k-header {
+  height: 32px;
+  padding: 0;
+}*/
+
+
+.k-grid tbody tr {
+  line-height: 14px;
+}
+
+.k-grid tbody td {
+  padding: 1px;
+}
+
+.btn-link {
+  font-size: 12px;
+}
+
+.k-dateinput-wrap .k-input, .k-dropdown-wrap .k-input, .k-picker-wrap .k-input, .k-numeric-wrap .k-input, .k-multiselect-wrap .k-button {
+  font-size: 12px;
+}
+
+.k-popup .k-item {
+  font-size: 12px;
+}

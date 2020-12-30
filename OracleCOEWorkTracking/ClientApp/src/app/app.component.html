@@ -1,0 +1,10 @@
+<app-header></app-header>
+<app-title-bar></app-title-bar>
+<div class="mb-5 body">
+  <ng-progress [positionUsing]="'marginLeft'" [minimum]="0.08" [maximum]="1"
+               [speed]="200" [showSpinner]="true" [direction]="'leftToRightIncreased'"
+               [color]="'#3370B4'" [trickleSpeed]="250" [thick]="true" [ease]="'linear'"></ng-progress>
+  <toaster-container></toaster-container>
+  <router-outlet></router-outlet>
+</div>
+

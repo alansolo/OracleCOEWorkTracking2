@@ -1,0 +1,444 @@
+<div class="modal-header">
+  <h2 class="modal-title lead">{{ 'RequestNo' | translate }}{{Request.id}}</h2>
+  
+  <div style="text-align: right;">
+    <button class="btn btn-primary" type="submit" form="editForm">{{ 'SaveRequest' | translate }}</button>
+    <button class="btn btn-secondary" type="button" (click)="activeModal.dismiss('close')">{{ 'Cancel' | translate }}</button>
+  </div>
+</div>
+<div class="modal-body">
+  
+  <form [formGroup]="editRequestForm" id="editForm" (submit)="saveRequest()">
+    <div class="row col-12">
+      <div class="row col-12">
+        <div class="form-group col-6" [ngClass]="displayFieldCss('appName')">
+          <label for="appName" class="small text-uppercase required">{{ 'AppNameLabel' | translate }}</label>
+          <app-select-list id="appName" [isDefaultFocus]="true" formControlName="appName" [listItems]="dropDownData?.appNames" [required]="true" (change)="onAppSelect($event)"></app-select-list>
+          <app-field-error-display [displayError]="isFieldInvalid('appName')" errorMsg="{{ 'FieldIsRequired' | translate }}"></app-field-error-display>
+        </div>
+      </div>
+      <div class="form-group col-6" [ngClass]="displayFieldCss('projectName')">
+        <label for="projectName" class="small text-uppercase required">{{ 'ProjectNameLabel' | translate }}</label>
+        <input id="projectName" formControlName="projectName" class="form-control" type="text" name="projectName" required />
+        <app-field-error-display [displayError]="isFieldInvalid('projectName')" errorMsg="{{ 'FieldIsRequired' | translate }}"></app-field-error-display>
+      </div>
+      <div class="form-group col-6" [ngClass]="displayFieldCss('status')">
+        <label for="status" class="small text-uppercase required">{{ 'Status' | translate }}</label>
+        <app-select-list id="status" formControlName="status" [listItems]="dropDownData?.statuses" [required]="true"></app-select-list>
+        <app-field-error-display [displayError]="isFieldInvalid('status')" errorMsg="{{ 'FieldIsRequired' | translate }}"></app-field-error-display>
+      </div>
+    </div>
+    <div class="row col-12">
+      <div class="form-group col-12" [ngClass]="displayFieldCss('problem')">
+        <label for="problem" class="small text-uppercase required">{{ 'Problem' | translate }}</label>
+        <textarea id="problem" formControlName="problem" class="form-control" type="text" rows="4" name="problem" required></textarea>
+        <app-field-error-display [displayError]="isFieldInvalid('problem')" errorMsg="{{ 'FieldIsRequired' | translate }}"></app-field-error-display>
+      </div>
+    </div>
+    <div class="row col-12">
+      <div class="form-group col-12" [ngClass]="displayFieldCss('benefitCase')">
+        <label for="benefitCase" class="small text-uppercase required">{{ 'BenefitCase' | translate }}</label>
+        <textarea id="benefitCase" formControlName="benefitCase" class="form-control" type="text" rows="4" name="benefitCase" required></textarea>
+        <app-field-error-display [displayError]="isFieldInvalid('benefitCase')" errorMsg="{{ 'FieldIsRequired' | translate }}"></app-field-error-display>
+      </div>
+    </div>
+    <div class="row col-12">
+      <div class="form-group col-4" [ngClass]="displayFieldCss('gbsPriority')">
+        <label for="gbsPriority" class="small text-uppercase">{{ 'GBSPriority' | translate }}</label>
+        <input id="gbsPriority" formControlName="gbsPriority" class="form-control" type="number" name="gbsPriority" min="0" max="999" />
+      </div>
+      <div class="form-group col-4" [ngClass]="displayFieldCss('coePriority')">
+        <label for="coePriority" class="small text-uppercase">{{ 'COEPriority' | translate }}</label>
+        <input id="coePriority" formControlName="coePriority" class="form-control" type="number" name="coePriority" min="0" max="999" />
+      </div>
+      <div class="form-group col-4">
+        <label for="notes" class="small text-uppercase">{{ 'Notes' | translate }}</label>
+        <button type="button" class="form-control btn btn-primary" (click)="viewNotes()">
+          View Notes
+        </button>
+      </div>
+    </div>
+    <div class="row col-12">
+      <div class="form-group col-6" [ngClass]="displayFieldCss('regions')">
+        <label for="regions" class="small text-uppercase required">{{ 'Region' | translate }}</label>
+        <ng-multiselect-dropdown [placeholder]=""
+                                 [data]="regions"
+                                 formControlName="regions"
+                                 [settings]="multiDropDownSettings" required>
+        </ng-multiselect-dropdown>
+        <app-field-error-display [displayError]="isFieldInvalid('regions')" errorMsg="{{ 'FieldIsRequired' | translate }}"></app-field-error-display>
+      </div>
+      <div class="form-group col-6" [ngClass]="displayFieldCss('sbUs')">
+        <label for="sbUs" class="small text-uppercase required">{{ 'SBU' | translate }}</label>
+        <ng-multiselect-dropdown [placeholder]=""
+                                 [data]="dropDownData?.sbUs"
+                                 formControlName="sbUs"
+                                 [settings]="multiDropDownSettings" required>
+        </ng-multiselect-dropdown>
+        <app-field-error-display [displayError]="isFieldInvalid('sbUs')" errorMsg="{{ 'FieldIsRequired' | translate }}"></app-field-error-display>
+      </div>
+    </div>
+    <div class="row col-12">
+      <div class="form-group col-6" [ngClass]="displayFieldCss('owningSite')">
+        <label for="owningSite" class="small text-uppercase">{{ 'OwningSite' | translate }}</label>
+        <app-select-list id="owningSite" formControlName="owningSite" [listItems]="owningSites" [required]="false"></app-select-list>
+      </div>
+      <div class="form-group col-6" [ngClass]="displayFieldCss('owningStream')">
+        <label for="owningStream" class="small text-uppercase required">{{ 'OwningStream' | translate }}</label>
+        <app-select-list id="owningStream" formControlName="owningStream" [listItems]="owningStreams" [required]="true"></app-select-list>
+        <app-field-error-display [displayError]="isFieldInvalid('owningStream')" errorMsg="{{ 'FieldIsRequired' | translate }}"></app-field-error-display>
+      </div>
+    </div>
+    <div class="row col-12">
+      <div class="form-group col-6" [ngClass]="displayFieldCss('impactedStreams')">
+        <label for="impactedStreams" class="small text-uppercase">{{ 'ImpactedStream' | translate }}</label>
+        <ng-multiselect-dropdown [placeholder]=""
+                                 [data]="dropDownData?.impactedStreams"
+                                 formControlName="impactedStreams"
+                                 [settings]="multiDropDownSettings">
+        </ng-multiselect-dropdown>
+      </div>
+      <div class="form-group col-6" [ngClass]="displayFieldCss('modules')">
+        <label for="modules" class="small text-uppercase">{{ 'Module' | translate }}</label>
+        <ng-multiselect-dropdown [placeholder]=""
+                                 [data]="modules"
+                                 formControlName="modules"
+                                 [settings]="multiDropDownSettings">
+        </ng-multiselect-dropdown>
+      </div>
+    </div>
+    <div class="row col-12">
+      <div class="form-group col-6" [ngClass]="displayFieldCss('mD_50_DueDate')">
+        <label for="mD_50_DueDate" class="small text-uppercase">{{ 'MD50DueDate' | translate }}</label>
+        <kendo-datepicker class="form-control" formControlName="mD_50_DueDate" [(ngModel)]="valueMD50DueDate" [max]="valueMD70DueDate"></kendo-datepicker>
+      </div>
+      <div class="form-group col-6" [ngClass]="displayFieldCss('mD_70_DueDate')">
+        <label for="mD_70_DueDate" class="small text-uppercase">{{ 'MD70DueDate' | translate }}</label>
+        <kendo-datepicker class="form-control" formControlName="mD_70_DueDate" [(ngModel)]="valueMD70DueDate" [min]="valueMD50DueDate" [disabled]="ValidMD70DueDate()"></kendo-datepicker>
+      </div>
+    </div>
+    <div class="row col-12">
+      <div class="form-group col-6" [ngClass]="displayFieldCss('testingDate')">
+        <label for="testingDate" class="small text-uppercase">{{ 'TestingDate' | translate }}</label>
+        <kendo-datepicker class="form-control" formControlName="testingDate" [(ngModel)]="valueTestingDate" [max]="valueProductionDate" [disabled]="ValidTestingDate()"></kendo-datepicker>
+      </div>
+      <div class="form-group col-6" [ngClass]="displayFieldCss('productionDate')">
+        <label for="productionDate" class="small text-uppercase">{{ 'ProductionDate' | translate }}</label>
+        <kendo-datepicker class="form-control" formControlName="productionDate" [(ngModel)]="valueProductionDate" [min]="valueTestingDate" [disabled]="ValidProductionDate()"></kendo-datepicker>
+      </div>
+    </div>
+    <div class="row col-12">
+      <div class="form-group col-3" [ngClass]="displayFieldCss('oracleDevEstimateOffShore')">
+        <label for="oracleDevEstimateOffShore" class="small text-uppercase">{{ 'OracleDevEstimateOffShore' | translate }}</label>
+        <input id="oracleDevEstimateOffShore" formControlName="oracleDevEstimateOffShore" class="form-control" type="number" name="oracleDevEstimateOffShore" min="0" max="99999" />
+      </div>
+      <div class="form-group col-3" [ngClass]="displayFieldCss('oracleDevEstimateOnShore')">
+        <label for="oracleDevEstimateOnShore" class="small text-uppercase">{{ 'OracleDevEstimateOnShore' | translate }}</label>
+        <input id="oracleDevEstimateOnShore" formControlName="oracleDevEstimateOnShore" class="form-control" type="number" name="oracleDevEstimateOnShore" min="0" max="99999" />
+      </div>
+      <div class="form-group col-3" [ngClass]="displayFieldCss('dcoeEstimate')">
+        <label for="dcoeEstimate" class="small text-uppercase">{{ 'DCOEEstimate' | translate }}</label>
+        <input id="dcoeEstimate" formControlName="dcoeEstimate" class="form-control" type="number" name="dcoeEstimate" min="0" max="99999" />
+      </div>
+      <div class="form-group col-3" [ngClass]="displayFieldCss('totalEstimate')">
+        <label for="totalEstimate" class="small text-uppercase">{{ 'TotalEstimate' | translate }}</label>
+        <input id="totalEstimate" formControlName="totalEstimate" class="form-control" type="number" name="totalEstimate" min="0" max="99999" />
+      </div>
+    </div>
+    <div class="row col-12">
+      <div class="form-group col-4" [ngClass]="displayFieldCss('requestor')">
+        <label for="requestor" class="small text-uppercase">{{ 'Requestor' | translate }}</label>
+        <input id="requestor" formControlName="requestor" class="form-control" type="text" name="requestor" readonly />
+      </div>
+      <div class="form-group col-2 pl-0 pt-4">
+        <button type="button" class="pds-btn-search" (click)="changeUserControl('requestor')">
+          <span class="material-icons">person</span>
+        </button>
+      </div>
+      <div class="form-group col-4" [ngClass]="displayFieldCss('biContact')">
+        <label for="biContact" class="small text-uppercase">{{ 'BIContact' | translate }}</label>
+        <input id="biContact" formControlName="biContact" class="form-control" type="text" name="biContact" readonly />
+      </div>
+      <div class="form-group col-2 pl-0 pt-4">
+        <button type="button" class="pds-btn-search" (click)="changeUserControl('biContact')">
+          <span class="material-icons">person</span>
+        </button>
+        <button type="button" class="btn btn-danger" (click)="clearUserControl('biContact')"> X </button>
+      </div>
+    </div>
+    <div class="row col-12">
+      <div class="form-group col-4" [ngClass]="displayFieldCss('frontLineContact')">
+        <label for="frontLineContact" class="small text-uppercase">{{ 'FrontLineITContact' | translate }}</label>
+        <input id="frontLineContact" formControlName="frontLineContact" class="form-control" type="text" name="frontLineContact" readonly />
+      </div>
+      <div class="form-group col-2 pl-0 pt-4">
+        <button type="button" class="pds-btn-search" (click)="changeUserControl('frontLineContact')">
+          <span class="material-icons">person</span>
+        </button>
+        <button type="button" class="btn btn-danger" (click)="clearUserControl('frontLineContact')"> X </button>
+      </div>
+      <div class="form-group col-4" [ngClass]="displayFieldCss('functionalContact')">
+        <label for="functionalContact" class="small text-uppercase">{{ 'FunctionalContact' | translate }}</label>
+        <input id="functionalContact" formControlName="functionalContact" class="form-control" type="text" name="functionalContact" readonly />
+      </div>
+      <div class="form-group col-2 pl-0 pt-4">
+        <button type="button" class="pds-btn-search" (click)="changeUserControl('functionalContact')">
+          <span class="material-icons">person</span>
+        </button>
+        <button type="button" class="btn btn-danger" (click)="clearUserControl('functionalContact')"> X </button>
+      </div>
+    </div>
+    <div class="row col-12">
+      <div class="form-group col-6" [ngClass]="displayFieldCss('estimateInfra')">
+        <label for="estimateInfra" class="small text-uppercase">{{ 'EstimateInfra' | translate }}</label>
+        <input id="gbsPriority" formControlName="estimateInfra" class="form-control" type="number" name="estimateInfra" min="0" max="999999999999" />
+      </div>
+      <div class="form-group col-6" [ngClass]="displayFieldCss('developmentTeams')">
+        <label for="developmentTeams" class="small text-uppercase">{{ 'DevelopmentTeam' | translate }}</label>
+        <ng-multiselect-dropdown [placeholder]=""
+                                 [data]="dropDownData?.developmentTeams"
+                                 formControlName="developmentTeams"
+                                 [settings]="multiDropDownSettings">
+        </ng-multiselect-dropdown>
+      </div>
+    </div>
+    <div class="row col-12">
+      <div class="form-group col-4" [ngClass]="displayFieldCss('dcoeDevelopmentLead')">
+        <label for="dcoeDevelopmentLead" class="small text-uppercase">{{ 'DCOEDevelopmentLead' | translate }}</label>
+        <input id="dcoeDevelopmentLead" formControlName="dcoeDevelopmentLead" class="form-control" type="text" name="dcoeDevelopmentLead" readonly />
+      </div>
+      <div class="form-group col-2 pl-0 pt-4">
+        <button type="button" class="pds-btn-search" (click)="changeUserControl('dcoeDevelopmentLead')">
+          <span class="material-icons">person</span>
+        </button>
+        <button type="button" class="btn btn-danger" (click)="clearUserControl('dcoeDevelopmentLead')"> X </button>
+      </div>
+      <div class="form-group col-4" [ngClass]="displayFieldCss('oracleDevelopmentLead')">
+        <label for="oracleDevelopmentLead" class="small text-uppercase">{{ 'OracleDevelopmentLead' | translate }}</label>
+        <input id="oracleDevelopmentLead" formControlName="oracleDevelopmentLead" class="form-control" type="text" name="oracleDevelopmentLead" readonly />
+      </div>
+      <div class="form-group col-2 pl-0 pt-4">
+        <button type="button" class="pds-btn-search" (click)="changeUserControl('oracleDevelopmentLead')">
+          <span class="material-icons">person</span>
+        </button>
+        <button type="button" class="btn btn-danger" (click)="clearUserControl('oracleDevelopmentLead')"> X </button>
+      </div>
+    </div>
+    <div class="row col-12">
+      <div class="form-group col-6" [ngClass]="displayFieldCss('mD_50')">
+        <label for="mD_50" class="small text-uppercase">{{ 'MD50' | translate }}</label>
+        <input id="mD_50" formControlName="mD_50" class="form-control" name="mD_50" />
+      </div>
+      <div class="form-group col-6" [ngClass]="displayFieldCss('mD_70')">
+        <label for="mD_70" class="small text-uppercase">{{ 'MD70' | translate }}</label>
+        <input id="mD_70" formControlName="mD_70" class="form-control" name="mD_70" />
+      </div>
+    </div>
+    <div class="row col-12">
+      <div class="form-group col-12" [ngClass]="displayFieldCss('tipUrl')">
+        <label for="tipUrl" class="small text-uppercase">{{ 'TIPLink' | translate }}</label>
+        <input id="tipUrl" formControlName="tipUrl" class="form-control" name="tipUrl" />
+      </div>
+    </div>
+    <div class="row col-12">
+      <div class="form-group col-6" [ngClass]="displayFieldCss('oraclePreProdEnvironments')">
+        <label for="oraclePreProdEnvironments" class="small text-uppercase">{{ 'OraclePreProdEnvironments' | translate }}</label>
+        <ng-multiselect-dropdown [placeholder]=""
+                                 [data]="dropDownData?.oraclePreProdEnvironments"
+                                 formControlName="oraclePreProdEnvironments"
+                                 [settings]="multiDropDownSettings">
+        </ng-multiselect-dropdown>
+      </div>
+      <div class="form-group col-6" [ngClass]="displayFieldCss('biRequest')">
+        <label for="biRequest" class="small text-uppercase">{{ 'BIRequest' | translate }}</label>
+        <app-select-list id="biRequest" formControlName="biRequest" [listItems]="dropDownData?.booleanDropDowns" [required]="false"></app-select-list>
+      </div>
+    </div>
+    <div class="row col-12">
+      <div class="form-group col-12" [ngClass]="displayFieldCss('originalSystemReference')">
+        <label for="originalSystemReference" class="small text-uppercase">{{ 'OriginalSystemReference' | translate }}</label>
+        <textarea id="originalSystemReference" formControlName="originalSystemReference" class="form-control" type="text" rows="2" name="originalSystemReference"></textarea>
+      </div>
+    </div>
+    <div class="row col-12">
+      <div class="form-group col-6" [ngClass]="displayFieldCss('dateRequested')">
+        <label for="dateRequested" class="small text-uppercase">{{ 'DateRequested' | translate }}</label>
+        <!--<kendo-datepicker class="form-control" formControlName="dateRequested"></kendo-datepicker>-->
+        <input id="dateRequested" formControlName="dateRequested" class="form-control" type="text" name="dateRequested" readonly />
+      </div>
+      <div class="form-group col-6" [ngClass]="displayFieldCss('dateModified')">
+        <label for="dateModified" class="small text-uppercase">{{ 'DateModified' | translate }}</label>
+        <!--<kendo-datepicker class="form-control" formControlName="dateModified"></kendo-datepicker>-->
+        <input id="dateModified" formControlName="dateModified" class="form-control" type="text" name="dateModified" readonly />
+      </div>
+    </div>
+    <div class="row col-12">
+      <div class="form-group col-6" [ngClass]="displayFieldCss('crNo')">
+        <label for="crNo" class="small text-uppercase">{{ 'CrNo' | translate }}</label>
+        <input id="crNo" formControlName="crNo" class="form-control" type="number" name="crNo" min="0" max="999999999999" />
+      </div>
+      <div class="form-group col-6" [ngClass]="displayFieldCss('modifiedBy')">
+        <label for="modifiedBye" class="small text-uppercase">{{ 'ModifiedBy' | translate }}</label>
+        <input id="modifiedBy" formControlName="modifiedBy" class="form-control" type="text" name="modifiedBy" readonly />
+      </div>
+    </div>
+    <hr />
+    <div class="row col-12">
+      <div class="form-group col-6" [ngClass]="displayFieldCss('ebsGateStatus')">
+        <label for="ebsGateStatus" class="small text-uppercase">{{ 'EBSGateStatus' | translate }}</label>
+        <app-select-list id="ebsGateStatus" formControlName="ebsGateStatus" [listItems]="dropDownData?.gateStatuses" [required]="false"></app-select-list>
+      </div>
+      <div class="form-group col-6" [ngClass]="displayFieldCss('ebsGateQuestionnaireUrl')">
+        <label for="ebsGateQuestionnaireUrl" class="small text-uppercase">{{ 'EBSGateQuestionnaire' | translate }}</label>
+        <input id="ebsGateQuestionnaireUrl" formControlName="ebsGateQuestionnaireUrl" class="form-control" name="ebsGateQuestionnaireUrl" />
+      </div>
+    </div>
+    <div class="row col-12">
+      <div class="form-group col-6" [ngClass]="displayFieldCss('nextEBSGate')">
+        <label for="nextEBSGate" class="small text-uppercase">{{ 'NextEBSGate' | translate }}</label>
+        <app-select-list id="nextEBSGate" formControlName="nextEBSGate" [listItems]="dropDownData?.gates" [required]="false"></app-select-list>
+      </div>
+      <div class="form-group col-6" [ngClass]="displayFieldCss('readyForEBSGate')">
+        <label for="readyForEBSGate" class="small text-uppercase">{{ 'ReadyForEBSGate' | translate }}</label>
+        <app-select-list id="readyForEBSGate" formControlName="readyForEBSGate" [listItems]="dropDownData?.booleanDropDowns" [required]="false"></app-select-list>
+      </div>
+    </div>
+    <hr />
+    <div class="row col-12">
+      <div class="form-group col-6" [ngClass]="displayFieldCss('biGateStatus')">
+        <label for="biGateStatus" class="small text-uppercase">{{ 'BIGateStatus' | translate }}</label>
+        <app-select-list id="biGateStatus" formControlName="biGateStatus" [listItems]="dropDownData?.gateStatuses" [required]="false"></app-select-list>
+      </div>
+      <div class="form-group col-6" [ngClass]="displayFieldCss('biGateQuestionnaireUrl')">
+        <label for="biGateQuestionnaireUrl" class="small text-uppercase">{{ 'BIGateQuestionnaire' | translate }}</label>
+        <input id="biGateQuestionnaireUrl" formControlName="biGateQuestionnaireUrl" class="form-control" name="biGateQuestionnaireUrl" />
+      </div>
+    </div>
+    <div class="row col-12">
+      <div class="form-group col-6" [ngClass]="displayFieldCss('nextBIGate')">
+        <label for="nextBIGate" class="small text-uppercase">{{ 'NextBIGate' | translate }}</label>
+        <app-select-list id="nextBIGate" formControlName="nextBIGate" [listItems]="dropDownData?.gates" [required]="false"></app-select-list>
+      </div>
+      <div class="form-group col-6" [ngClass]="displayFieldCss('readyForBIGate')">
+        <label for="readyForBIGate" class="small text-uppercase">{{ 'ReadyForBIGate' | translate }}</label>
+        <app-select-list id="readyForBIGate" formControlName="readyForBIGate" [listItems]="dropDownData?.booleanDropDowns" [required]="false"></app-select-list>
+      </div>
+    </div>
+    <hr />
+    <div class="row col-12">
+      <div class="form-group col-6" [ngClass]="displayFieldCss('_NETGateStatus')">
+        <label for="_NETGateStatus" class="small text-uppercase">{{ '_NETGateStatus' | translate }}</label>
+        <app-select-list id="_NETGateStatus" formControlName="_NETGateStatus" [listItems]="dropDownData?.gateStatuses" [required]="false"></app-select-list>
+      </div>
+      <div class="form-group col-6" [ngClass]="displayFieldCss('_NETGateQuestionnaireUrl')">
+        <label for="_NETGateQuestionnaireUrl" class="small text-uppercase">{{ '_NETGateQuestionnaire' | translate }}</label>
+        <input id="_NETGateQuestionnaireUrl" formControlName="_NETGateQuestionnaireUrl" class="form-control" name="_NETGateQuestionnaireUrl" />
+      </div>
+    </div>
+    <div class="row col-12">
+      <div class="form-group col-6" [ngClass]="displayFieldCss('next_NETGate')">
+        <label for="next_NETGate" class="small text-uppercase">{{ 'Next_NETGate' | translate }}</label>
+        <app-select-list id="next_NETGate" formControlName="next_NETGate" [listItems]="dropDownData?.gates" [required]="false"></app-select-list>
+      </div>
+      <div class="form-group col-6" [ngClass]="displayFieldCss('readyFor_NETGate')">
+        <label for="readyFor_NETGate" class="small text-uppercase">{{ 'ReadyFor_NETGate' | translate }}</label>
+        <app-select-list id="readyFor_NETGate" formControlName="readyFor_NETGate" [listItems]="dropDownData?.booleanDropDowns" [required]="false"></app-select-list>
+      </div>
+    </div>
+    <hr />
+    <div class="row col-12">
+      <div class="form-group col-6" [ngClass]="displayFieldCss('otmGateStatus')">
+        <label for="otmGateStatus" class="small text-uppercase">{{ 'OTMGateStatus' | translate }}</label>
+        <app-select-list id="otmGateStatus" formControlName="otmGateStatus" [listItems]="dropDownData?.gateStatuses" [required]="false"></app-select-list>
+      </div>
+      <div class="form-group col-6" [ngClass]="displayFieldCss('otmGateQuestionnaireUrl')">
+        <label for="otmGateQuestionnaireUrl" class="small text-uppercase">{{ 'OTMGateQuestionnaire' | translate }}</label>
+        <input id="otmGateQuestionnaireUrl" formControlName="otmGateQuestionnaireUrl" class="form-control" name="otmGateQuestionnaireUrl" />
+      </div>
+    </div>
+    <div class="row col-12">
+      <div class="form-group col-6" [ngClass]="displayFieldCss('otmebsGate')">
+        <label for="otmebsGate" class="small text-uppercase">{{ 'OTMEBSGate' | translate }}</label>
+        <app-select-list id="otmebsGate" formControlName="otmebsGate" [listItems]="dropDownData?.gates" [required]="false"></app-select-list>
+      </div>
+      <div class="form-group col-6" [ngClass]="displayFieldCss('readyForOTMGate')">
+        <label for="readyForOTMGate" class="small text-uppercase">{{ 'ReadyForOTMGate' | translate }}</label>
+        <app-select-list id="readyForOTMGate" formControlName="readyForOTMGate" [listItems]="dropDownData?.booleanDropDowns" [required]="false"></app-select-list>
+      </div>
+    </div>
+    <hr />
+    <div class="row col-12">
+      <div class="form-group col-6" [ngClass]="displayFieldCss('attribute1')">
+        <label for="attribute1" class="small text-uppercase">{{ dropDownData?.applicationAttributesSelect?.attribute1 | translate }}</label>
+        <input id="attribute1" formControlName="attribute1" class="form-control" name="attribute1" />
+      </div>
+      <div class="form-group col-6" [ngClass]="displayFieldCss('attribute2')">
+        <label for="attribute2" class="small text-uppercase">{{ dropDownData?.applicationAttributesSelect?.attribute2 | translate }}</label>
+        <input id="attribute2" formControlName="attribute2" class="form-control" name="attribute2" />
+      </div>
+    </div>
+    <div class="row col-12">
+      <div class="form-group col-6" [ngClass]="displayFieldCss('attribute3')">
+        <label for="attribute3" class="small text-uppercase">{{ dropDownData?.applicationAttributesSelect?.attribute3 | translate }}</label>
+        <input id="attribute3" formControlName="attribute3" class="form-control" name="attribute3" />
+      </div>
+      <div class="form-group col-6" [ngClass]="displayFieldCss('attribute4')">
+        <label for="attribute4" class="small text-uppercase">{{ dropDownData?.applicationAttributesSelect?.attribute4 | translate }}</label>
+        <input id="attribute4" formControlName="attribute4" class="form-control" name="attribute4" />
+      </div>
+    </div>
+    <div class="row col-12">
+      <div class="form-group col-6" [ngClass]="displayFieldCss('attribute5')">
+        <label for="attribute5" class="small text-uppercase">{{ dropDownData?.applicationAttributesSelect?.attribute5 | translate }}</label>
+        <input id="attribute5" formControlName="attribute5" class="form-control" name="attribute5" />
+      </div>
+      <div class="form-group col-6" [ngClass]="displayFieldCss('attribute6')">
+        <label for="attribute6" class="small text-uppercase">{{ dropDownData?.applicationAttributesSelect?.attribute6 | translate }}</label>
+        <input id="attribute6" formControlName="attribute6" class="form-control" name="attribute6" />
+      </div>
+    </div>
+    <div class="row col-12">
+      <div class="form-group col-6" [ngClass]="displayFieldCss('attribute7')">
+        <label for="attribute7" class="small text-uppercase">{{ dropDownData?.applicationAttributesSelect?.attribute7 | translate }}</label>
+        <input id="attribute7" formControlName="attribute7" class="form-control" name="attribute7" />
+      </div>
+      <div class="form-group col-6" [ngClass]="displayFieldCss('attribute8')">
+        <label for="attribute8" class="small text-uppercase">{{ dropDownData?.applicationAttributesSelect?.attribute8 | translate }}</label>
+        <input id="attribute8" formControlName="attribute8" class="form-control" name="attribute8" />
+      </div>
+    </div>
+    <div class="row col-12">
+      <div class="form-group col-6" [ngClass]="displayFieldCss('attribute9')">
+        <label for="attribute9" class="small text-uppercase">{{ dropDownData?.applicationAttributesSelect?.attribute9 | translate }}</label>
+        <input id="attribute9" formControlName="attribute9" class="form-control" name="attribute9" />
+      </div>
+      <div class="form-group col-6" [ngClass]="displayFieldCss('attribute10')">
+        <label for="attribute10" class="small text-uppercase">{{ dropDownData?.applicationAttributesSelect?.attribute10 | translate }}</label>
+        <kendo-datepicker class="form-control" formControlName="attribute10"></kendo-datepicker>
+      </div>
+    </div>
+    <hr />
+    <div class="row col-12">
+      <div class="form-group col-3">
+        <label for="originalSystemReference" class="small text-uppercase">{{ 'AddAttachment' | translate }}</label>
+        <label class="btn btn-primary btn-block">
+          {{ 'Select Files' | translate }}
+          <input type="file"
+                 id="file"
+                 multiple
+                 hidden
+                 (change)="handleFileInput($event)" />
+        </label>
+      </div>
+      <div class="form-group col-9">
+        <div *ngFor="let selected of listOfFiles;let index = index">
+          <span>
+            <label class="small text-uppercase">{{selected}}</label>
+            <button class="btn btn-danger" (click)="removeSelectedFile(index)"> X </button>
+          </span>
+        </div>
+      </div>
+    </div>
+    <hr />
+  </form>
+</div>

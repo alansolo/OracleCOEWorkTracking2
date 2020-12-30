@@ -1,0 +1,11 @@
+/* To get rid of triangle on title bar */
+.title-bar-override:after {
+  border-top: 80px solid #3370b4 !important;
+}
+
+#userData {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  text-align: right;
+}

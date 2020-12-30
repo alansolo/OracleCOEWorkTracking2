@@ -1,0 +1,12 @@
+.content-h2:before {
+  border-top: 0px solid;
+}
+
+.component-fluid {
+  margin-right: 4%;
+  margin-left: 4%;
+}
+
+.material-icons {
+  font-size: 12px
+}

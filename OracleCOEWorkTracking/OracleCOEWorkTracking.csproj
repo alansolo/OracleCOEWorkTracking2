@@ -1,0 +1,175 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+    <IsPackable>false</IsPackable>
+    <SpaRoot>ClientApp\</SpaRoot>
+    <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
+
+    <!-- Set this to true if you enable server-side prerendering -->
+    <BuildServerSideRenderer>false</BuildServerSideRenderer>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Compile Remove="ClientApp\src\app\modals\NewFolder\**" />
+    <Content Remove="$(SpaRoot)**" />
+    <Content Remove="ClientApp\src\app\modals\NewFolder\**" />
+    <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="ClientApp\src\app\modals\NewFolder\**" />
+    <None Remove="ClientApp\src\app\modals\NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ClientApp\package-lock.json.bak" />
+    <None Remove="ClientApp\package-lock.json.bak" />
+    <None Remove="ClientApp\package-lock.json.new" />
+    <None Remove="ClientApp\package-lock.json.new" />
+    <None Remove="ClientApp\package.json.bak" />
+    <None Remove="ClientApp\package.json.bak" />
+    <None Remove="ClientApp\package.json.new" />
+    <None Remove="ClientApp\package.json.new" />
+    <None Remove="ClientApp\src\app\interfaces\trackable.ts" />
+    <None Remove="ClientApp\src\app\models\application.ts" />
+    <None Remove="ClientApp\src\app\models\attachment.ts" />
+    <None Remove="ClientApp\src\app\models\boolean-drop-down.ts" />
+    <None Remove="ClientApp\src\app\models\development-team.ts" />
+    <None Remove="ClientApp\src\app\models\drop-down-data.ts" />
+    <None Remove="ClientApp\src\app\models\gate-status.ts" />
+    <None Remove="ClientApp\src\app\models\gate.ts" />
+    <None Remove="ClientApp\src\app\models\impacted-stream.ts" />
+    <None Remove="ClientApp\src\app\models\module.ts" />
+    <None Remove="ClientApp\src\app\models\oracle-pre-prod-environment.ts" />
+    <None Remove="ClientApp\src\app\models\owning-site.ts" />
+    <None Remove="ClientApp\src\app\models\owning-stream.ts" />
+    <None Remove="ClientApp\src\app\models\Region.ts" />
+    <None Remove="ClientApp\src\app\models\request-note.ts" />
+    <None Remove="ClientApp\src\app\models\request-view.ts" />
+    <None Remove="ClientApp\src\app\models\request.ts" />
+    <None Remove="ClientApp\src\app\models\sbu.ts" />
+    <None Remove="ClientApp\src\app\models\select-list-item.ts" />
+    <None Remove="ClientApp\src\app\models\service-call-result.ts" />
+    <None Remove="ClientApp\src\app\models\status.ts" />
+    <None Remove="ClientApp\src\app\models\user.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="7.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="4.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.11" />
+    <PackageReference Include="System.DirectoryServices" Version="4.6.0" />
+    <PackageReference Include="System.DirectoryServices.AccountManagement" Version="4.6.0" />
+    <PackageReference Include="System.ServiceModel.Duplex" Version="4.4.*" />
+    <PackageReference Include="System.ServiceModel.Http" Version="4.4.*" />
+    <PackageReference Include="System.ServiceModel.NetTcp" Version="4.4.*" />
+    <PackageReference Include="System.ServiceModel.Security" Version="4.4.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Data\Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\interfaces\trackable.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\attachment.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\drop-down-data.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\application.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\request-note.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\status.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\impacted-stream.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\development-team.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\oracle-pre-prod-environment.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\module.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\gate-status.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\gate.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\boolean-drop-down.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\request-view.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\request.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\owning-stream.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\owning-site.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\sbu.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\service-call-result.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\select-list-item.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\region.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\user.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources\FieldNamesResource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>FieldNamesResource.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\UserMessageResource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>UserMessageResource.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\FieldNamesResource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>FieldNamesResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\UserMessageResource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>UserMessageResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientApp\src\app\modals\find-user-modal\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <OpenApiReference Include="OpenAPIs\ADService.svc" CodeGenerator="NSwagCSharp" Namespace="ADService">
+      <SourceUri>http://dev.web.ppg.com/ADService/ADService.svc</SourceUri>
+    </OpenApiReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services" />
+  </ItemGroup>
+
+  <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
+    <!-- Ensure Node.js is installed -->
+    <Exec Command="node --version" ContinueOnError="true">
+      <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
+    </Exec>
+    <Error Condition="'$(ErrorCode)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE." />
+    <Message Importance="high" Text="Restoring dependencies using 'npm'. This may take several minutes..." />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+  </Target>
+
+  <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
+    <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build -- --prod" Condition="'$(AngularProdBuild)' == 'false' " />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build:ssr -- --prod" Condition=" '$(BuildServerSideRenderer)' == 'true' " />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build:prod -- --prod" Condition=" '$(AngularProdBuild)' == 'true' " />
+
+    <!-- Include the newly-built files in the publish output -->
+    <ItemGroup>
+      <DistFiles Include="$(SpaRoot)dist\**; $(SpaRoot)dist-server\**" />
+      <DistFiles Include="$(SpaRoot)node_modules\**" Condition="'$(BuildServerSideRenderer)' == 'true'" />
+      <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
+        <RelativePath>%(DistFiles.Identity)</RelativePath>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </ResolvedFileToPublish>
+    </ItemGroup>
+  </Target>
+
+</Project>

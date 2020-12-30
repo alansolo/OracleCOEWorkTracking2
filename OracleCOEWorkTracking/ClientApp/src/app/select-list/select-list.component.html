@@ -1,0 +1,5 @@
+<select name="item" [compareWith]="compareFn" [(ngModel)]="selectedItem" (change)="onChange()" class="form-control" [disabled]="IsDisabled" #selectInput>
+  <option *ngFor="let item of listItems" [ngValue]="item" [disabled]="item.id == -1">
+    {{item.name}}
+  </option>
+</select>

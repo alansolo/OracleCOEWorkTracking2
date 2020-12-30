@@ -1,0 +1,8 @@
+hr {
+  border: none;
+  clear: both;
+  display: block;
+  width: 96%;
+  background-color: lightgray;
+  height: 0.1rem;
+}

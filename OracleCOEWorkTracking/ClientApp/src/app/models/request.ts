@@ -1,0 +1,134 @@
+import { Trackable } from '../interfaces/trackable';
+import { Region } from './Region';
+import { AppName } from './Application';
+import { SBU } from './sbu';
+import { OwningSite } from './owning-site';
+import { OwningStream } from './owning-stream';
+import { Attachment } from './attachment';
+import { ImpactedStream } from './impacted-stream';
+import { Module } from './module';
+import { DevelopmentTeam } from './development-team';
+import { OraclePreProdEnvironment } from './oracle-pre-prod-environment';
+import { BooleanDropDown } from './boolean-drop-down';
+import { GateStatus } from './gate-status';
+import { Gate } from './gate';
+import { Status } from './status';
+import { SelectListItem }  from './select-list-item'
+
+export class Request implements Trackable {
+  id: number;
+  appName?: AppName;
+  projectName: string;
+  problem: string;
+  benefitCase: string;
+  coePriority: number;
+  gbsPriority: number;
+  statusId: number;
+  status: Status;
+  owningStreams: Array<OwningStream>;
+  regions: Array<Region>;
+  regionsString?: string;
+  sbUs: Array<SBU>;
+  sbUsString?: string;
+  impactedStreams: Array<ImpactedStream>;
+  impactedStreamsString?: string;
+  modules: Array<Module>;
+  modulesString?: string;
+  developmentTeams: Array<DevelopmentTeam>;
+  developmentTeamsString? : string
+  oraclePreProdEnvironments: Array<OraclePreProdEnvironment>;
+  oraclePreProdEnvironmentsString?: string;
+  attachments?: Array<Attachment>;
+  mD_50_DueDate?: Date;
+  testingDate?: Date;
+  mD_70_DueDate?: Date;
+  productionDate?: Date;
+  totalEstimate: number;
+  oracleDevEstimateOffShore: number;
+  oracleDevEstimateOnShore: number;
+  dcoeEstimate: number;
+  crNo: number;
+  functionalContact: string;
+  biContact: string;
+  oracleDevelopmentLead: string;
+  dcoeDevelopmentLead: string;
+  mD_70: string;
+  mD_50: string;
+  tipUrl: string;
+  ebsGateQuestionnaireUrl: string;
+  biGateQuestionnaireUrl: string;
+  _NETGateQuestionnaireUrl: string;
+  otmGateQuestionnaireUrl: string;
+  readyForEBSGateId?: number;
+  readyForEBSGate: BooleanDropDown;
+  ebsGateStatusId?: number;
+  ebsGateStatus: GateStatus;
+  nextEBSGateId?: number;
+  nextEBSGate: Gate;
+  readyForOTMGateId?: number;
+  readyForOTMGate: BooleanDropDown;
+  otmGateStatusId?: number;
+  otmGateStatus: GateStatus;
+  otmebsGateId?: number;
+  otmebsGate: Gate;
+  readyForBIGateId?: number;
+  readyForBIGate: BooleanDropDown;
+  biGateStatusId?: number;
+  biGateStatus: GateStatus;
+  nextBIGateId?: number;
+  nextBIGate: Gate;
+  readyFor_NETGateId?: number;
+  readyFor_NETGate: BooleanDropDown;
+  _NETGateStatusId?: number;
+  _NETGateStatus: GateStatus;
+  next_NETGateId?: number;
+  next_NETGate: Gate;
+  estimateInfra: number;
+  frontLineContact: string;
+  owningSiteId?: number;
+  owningSite?: OwningSite;
+  requestor: string;
+  owningStreamId: number;
+  owningStream?: OwningStream;
+  biRequestId: number;
+  biRequest: BooleanDropDown; 
+  originalSystemReference?: string;
+  attribute1?: string;
+  attribute2?: string;
+  attribute3?: string;
+  attribute4?: string;
+  attribute5?: string;
+  attribute6?: string;
+  attribute7?: string;
+  attribute8?: string;
+  attribute9?: string;
+  attribute10?: string;
+  createdBy?: string;
+  createdOn?: Date;
+  modifiedBy?: string;
+  modifiedOn?: Date;
+  applicationId: number;
+}
+
+
+export class AddRequest implements Trackable {
+  id?: number;
+  appName?: AppName;
+  projectName: string;
+  problem: string;
+  benefitCase: string;
+  regions: Array<Region>;
+  sbus: Array<SBU>; 
+  owningSite?: OwningSite; 
+  owningStream: OwningStream;
+  biRequestId: number;
+  originalSystemReference?: string;
+  requestor: string;
+
+  createdBy?: string;
+  createdOn?: Date;
+  modifiedBy?: string;
+  modifiedOn?: Date;
+}
+
+

@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29411.108
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OracleCOEWorkTracking", "OracleCOEWorkTracking\OracleCOEWorkTracking.csproj", "{51EE8DCF-E761-4920-8B75-D713C1883500}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{59FDD823-02CA-4FCF-824B-8577F3BE6A26}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Database", "Database\Database.sqlproj", "{513B3C30-1AEC-4923-A3D0-E29901214129}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{51EE8DCF-E761-4920-8B75-D713C1883500}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51EE8DCF-E761-4920-8B75-D713C1883500}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51EE8DCF-E761-4920-8B75-D713C1883500}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51EE8DCF-E761-4920-8B75-D713C1883500}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59FDD823-02CA-4FCF-824B-8577F3BE6A26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59FDD823-02CA-4FCF-824B-8577F3BE6A26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59FDD823-02CA-4FCF-824B-8577F3BE6A26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59FDD823-02CA-4FCF-824B-8577F3BE6A26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{513B3C30-1AEC-4923-A3D0-E29901214129}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{513B3C30-1AEC-4923-A3D0-E29901214129}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{513B3C30-1AEC-4923-A3D0-E29901214129}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{513B3C30-1AEC-4923-A3D0-E29901214129}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{513B3C30-1AEC-4923-A3D0-E29901214129}.Release|Any CPU.Build.0 = Release|Any CPU
+		{513B3C30-1AEC-4923-A3D0-E29901214129}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6D19A659-F8D1-46FD-B7A5-A9B969D95ED5}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://dev.azure.com/ppgit-tfs
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Data\\Data.csproj
+		SccProjectName1 = Data
+		SccLocalPath1 = Data
+		SccProjectUniqueName2 = OracleCOEWorkTracking\\OracleCOEWorkTracking.csproj
+		SccProjectName2 = OracleCOEWorkTracking
+		SccLocalPath2 = OracleCOEWorkTracking
+		SccProjectUniqueName3 = Database\\Database.sqlproj
+		SccProjectName3 = Database
+		SccLocalPath3 = Database
+	EndGlobalSection
+EndGlobal

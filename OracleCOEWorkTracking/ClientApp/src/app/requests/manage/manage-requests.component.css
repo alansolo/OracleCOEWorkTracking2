@@ -1,0 +1,28 @@
+
+.content-h2:before {
+  border-top: 0px solid;
+}
+
+.component-fluid {
+  margin-right: 4%;
+  margin-left: 4%;
+}
+
+.material-icons {
+  font-size: 12px
+}
+
+.warning {
+  background-color: crimson;
+  border: 1px solid crimson;
+}
+
+
+
+/*#requestsGrid .k-grid-header {
+  padding: 0 !important;
+}
+
+#requestsGrid .k-grid-content {
+  overflow-y: visible;
+}*/
